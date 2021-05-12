@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  php-apache:
+    build: .
+    ports:
+      - 30001:80
+    volumes:
+      - ./www/:/var/www/html/
+      - ../xdebug_script/:/var/www/xdebug_script/
+    restart: always
+    networks:
+      - appg_network_group
+
+networks:
+  appg_network_group:
+    external:
+      name: appg_network_group

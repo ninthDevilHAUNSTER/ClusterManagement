@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  # 用于统计 CC
+  cc:
+    image: mariadb:10.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=code_coverage
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin123
+    restart: always
+    ports:
+      - 21306:3306
+    networks:
+      - appg_network_group
+
+  # 为所有的APP配置数据库
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    restart: always
+    networks:
+      - appg_network_group
+
+networks:
+  appg_network_group:
+    external:
+      name: appg_network_group

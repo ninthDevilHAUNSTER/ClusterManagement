@@ -1,0 +1,4 @@
+# Project exclude paths
+/cc_admin/web/
+/LimeSurvey-3.21.3-191219/www/
+/xdebug_script/coverages/
