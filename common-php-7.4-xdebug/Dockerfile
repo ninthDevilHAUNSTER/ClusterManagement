@@ -45,7 +45,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 # Modify Xdebug
 #RUN mkdir /var/www/xdebug_script
-#RUN mkdir /var/www/xdebug_script/coverages
+#RUN mkdir /var/www/xdebug_script/coverage
 #RUN chmod -R 777 /var/www/xdebug_script/
 
 RUN echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

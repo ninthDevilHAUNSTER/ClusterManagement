@@ -4,7 +4,7 @@ services:
   php-apache:
     build: .
     ports:
-      - 30001:80
+      - 30000:80
     volumes:
       - ./www/:/var/www/html/
       - ../xdebug_script/:/var/www/xdebug_script/
