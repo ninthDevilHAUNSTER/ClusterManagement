@@ -1,10 +1,8 @@
-<?php
-
-
+<?php 
 // 增加命令行传参脚本
-error_reporting(E_ALL);
-ini_set('error_reporting', E_ALL);
-
+error_reporting(E_ERROR);
+ini_set('error_reporting', E_ERROR);
+date_default_timezone_set("Asia/Shanghai");
 // 在触发到特定行的时候，把相应的变量输出出来
 ini_set("xdebug.collect_params", 4);
 ini_set("xdebug.remote_log", "xdebug.log");
@@ -58,27 +56,25 @@ function end_coverage_cav39s8hca($caller_shutdown_func = False)
             error_log('calling xdebug stop');
             xdebug_stop_code_coverage(); // true to destroy in memory information, not resuming later
         }
-       file_put_contents($coverageName . '.json', $codecoverageData);
-//         $included_files = get_included_files();
-//         $_new_path_detection_flag = ensure_new_path($coverageName, $test_group, $codecoverageData, $included_files, $fk_software_id, $fk_software_version_id);
-//         if ($_new_path_detection_flag) {
-//             write_to_db_vb76bvgbasc($coverageName, $test_group, $codecoverageData, $included_files, $fk_software_id, $fk_software_version_id, $_request_hash);
-//         }
+//        file_put_contents($coverageName . '.json', $codecoverageData);
+        $included_files = get_included_files();
+        $_new_path_detection_flag = ensure_new_path($coverageName, $test_group, $codecoverageData, $included_files, $fk_software_id, $fk_software_version_id);
+        if ($_new_path_detection_flag) {
+            write_to_db_vb76bvgbasc($coverageName, $test_group, $codecoverageData, $included_files, $fk_software_id, $fk_software_version_id, $_request_hash);
+        }
     } catch (Exception $ex) {
         error_log($ex);
         file_put_contents($coverageName . '.ex', $ex);
     }
-    echo "<input type='hidden' id='_REQUEST_HASH_dfnajszKOFHN' value='$_request_hash'/>";
-    echo "<input type='hidden' id='_NEW_PATH_DETECTION_dfnajszKOFHN' value='$_new_path_detection_flag'/>";
-//    setcookie("_REQUEST_HASH", $_request_hash);
-//    setcookie("_NEW_PATH_DETECTION", $_new_path_detection_flag);
+    //echo "<input type='hidden' id='_REQUEST_HASH_dfnajszKOFHN' value='$_request_hash'/>";
+    //echo "<input type='hidden' id='_NEW_PATH_DETECTION_dfnajszKOFHN' value='$_new_path_detection_flag'/>";
 }
 
 
 function ensure_new_path($coverageName, $test_group, $codecoverageData, $included_files, $fk_software_id, $fk_software_version_id)
 {
     # return if detect new path.
-    $mysqli = new mysqli("websec", "root", "password", "code_coverage", 22306);
+    $mysqli = new mysqli("cc", "admin", "admin123", "code_coverage", 3306);
     $mysqli->autocommit(FALSE);
     if (mysqli_connect_errno()) {
         error_log(sprintf("Connect failed: %s", mysqli_connect_error()));
@@ -89,7 +85,7 @@ function ensure_new_path($coverageName, $test_group, $codecoverageData, $include
 
 function write_to_db_vb76bvgbasc($coverageName, $test_group, $codecoverageData, $included_files, $fk_software_id, $fk_software_version_id, $_request_hash)
 {
-    $mysqli = new mysqli("websec", "root", "password", "code_coverage", 22306);
+    $mysqli = new mysqli("cc", "admin", "admin123", "code_coverage", 3306);
     $mysqli->autocommit(FALSE);
     if (mysqli_connect_errno()) {
         error_log(sprintf("Connect failed: %s", mysqli_connect_error()));
@@ -153,7 +149,8 @@ function _data_collection()
         'XDEBUG_SESSION' => 0,
     )); # delete meaningless items;
     $r[] = array('REQUEST_URI' => $_SERVER['REQUEST_URI'], 'REQUEST_METHOD' => $_SERVER['REQUEST_METHOD']);
-    $r[] = $_REQUEST;
+    $r[] = $_POST;
+    $r[] = $_GET;
     $r[] = $tmp_cookie;
     return $r;
 }

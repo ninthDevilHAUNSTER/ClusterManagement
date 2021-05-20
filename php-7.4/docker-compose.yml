@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  php-nginx:
+    build: .
+    ports:
+      - 31000:80
+    volumes:
+      - ./www/:/app/
+      - ../xdebug_script/:/var/www/xdebug_script/
+    restart: always
+    networks:
+      - appg_network_group
+
+networks:
+  appg_network_group:
+    external:
+      name: appg_network_group

@@ -1,12 +1,12 @@
 version: '2'
 
 services:
-  php-apache:
+  php-nginx:
     build: .
     ports:
-      - 30000:80
+      - 31000:80
     volumes:
-      - ./www/:/var/www/html/
+      - ./www/:/app/
       - ../xdebug_script/:/var/www/xdebug_script/
     restart: always
     networks:
