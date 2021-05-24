@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  # NEO4J DOCKER
+  neo4j:
+    image: neo4j:enterprise
+    environment:
+      - AGREEMENT=yes
+    restart: always
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./data:/data
+    networks:
+      - appg_network_group
+
+networks:
+  appg_network_group:
+    external:
+      name: appg_network_group
