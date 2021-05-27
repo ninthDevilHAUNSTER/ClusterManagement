@@ -4,6 +4,8 @@ RUN pecl install xdebug && \
 RUN apt-get update && apt-get install -y mlocate \
                                      libfreetype6-dev \
                                      libjpeg62-turbo-dev \
+                                     libwebp-dev \ 
+                                     libxpm-dev \
                                      libpng-dev && \
 docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir --with-png-dir --with-webp-dir --with-xpm-dir && \
 docker-php-ext-install -j$(nproc) gd

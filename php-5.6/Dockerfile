@@ -4,8 +4,10 @@ RUN pecl install xdebug-2.5.0 && \
 RUN apt-get update && apt-get install -y mlocate \
                                      libfreetype6-dev \
                                      libjpeg62-turbo-dev \
+                                     libwebp-dev \ 
+                                     libxpm-dev \
                                      libpng-dev && \
-docker-php-ext-configure gd --with-freetype --with-jpeg --with-png && \
+docker-php-ext-configure gd --with-freetype --with-jpeg --with-png --with-webp && \
 docker-php-ext-install -j$(nproc) gd
 
 RUN chmod -R 777 /app/
