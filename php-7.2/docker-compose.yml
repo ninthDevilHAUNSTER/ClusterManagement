@@ -6,8 +6,9 @@ services:
     ports:
       - 31000:80
     volumes:
-      - ./www/:/app/
+      - ./files/www/:/app/
       - ../xdebug_script/:/var/www/xdebug_script/
+      # - ./xdebug.so:/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so
     restart: always
     networks:
       - appg_network_group
