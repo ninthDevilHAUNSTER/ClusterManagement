@@ -158,4 +158,5 @@ function _data_collection()
 
 register_shutdown_function('shutdown_ashd9va');
 error_log('registered shutdown_ashd9va as shutdown function');
+
 ?>
